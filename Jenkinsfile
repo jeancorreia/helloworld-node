@@ -19,7 +19,7 @@ node {
          * For this example, we're using a Volkswagen-type approach ;-) */
 
         app.inside {
-            sh 'grep node Dockerfile ; if [ $? -ne 0 ] ;then exit 1 ;fi'
+            sh 'grep ubuntu Dockerfile ; if [ $? -ne 0 ] ;then exit 1 ;fi'
         }
     }
 
