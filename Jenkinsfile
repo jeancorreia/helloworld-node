@@ -24,18 +24,6 @@ node {
         }
     }
 
-    stage('Approve') {
-        steps {
-            sh  """
-                # Some commands
-                """
-            script {
-              timeout(time: 5, unit: 'MINUTES') {
-                input(id: "Deploy Gate", message: "Deploy ${params.project_name}?", ok: 'Deploy')
-            }
-        }
-    } 
-
     stage('Deployment') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
