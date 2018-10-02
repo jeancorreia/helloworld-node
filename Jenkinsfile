@@ -24,8 +24,7 @@ node {
         }
     }
 
-
-stage('Approve') {
+    stage('Approve') {
         steps {
             sh  """
                 # Some commands
@@ -33,9 +32,9 @@ stage('Approve') {
             script {
               timeout(time: 5, unit: 'MINUTES') {
                 input(id: "Deploy Gate", message: "Deploy ${params.project_name}?", ok: 'Deploy')
-              }
             }
         }
+    } 
 
     stage('Deployment') {
         /* Finally, we'll push the image with two tags:
