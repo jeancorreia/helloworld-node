@@ -1,3 +1,4 @@
+
 node {
     def app
 
@@ -19,11 +20,24 @@ node {
          * For this example, we're using a Volkswagen-type approach ;-) */
 
         app.inside {
-            sh 'grep ubuntu Dockerfile ; if [ $? -ne 0 ] ;then exit 1 ;fi'
+            sh 'grep node Dockerfile ; if [ $? -ne 0 ] ;then exit 1 ;fi'
         }
     }
 
-    stage('Upload Image to Nexus') {
+
+stage('Approve') {
+        steps {
+            sh  """
+                # Some commands
+                """
+            script {
+              timeout(time: 5, unit: 'MINUTES') {
+                input(id: "Deploy Gate", message: "Deploy ${params.project_name}?", ok: 'Deploy')
+              }
+            }
+        }
+
+    stage('Deployment') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
