@@ -1,13 +1,12 @@
-# use a node base image
-FROM node:7-onbuild
+# Imagem Base
+FROM node:latest
 
-# set maintainer
+# Mantenedor
 LABEL maintainer "jeancorreia@mylab.jcc"
 
-# set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
+EXPOSE 8080
+COPY server.js .
+CMD node server.js
 
-# tell docker what port to expose
+# Porta/Socket Exposto para Conexao
 EXPOSE 8000
