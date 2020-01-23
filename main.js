@@ -1,12 +1,10 @@
-// load the http module
+// server.js
 var http = require('http');
 
-// configure our HTTP server
-var server = http.createServer(function (request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Teste 20:02 \n");
-});
-
-// listen on localhost:8000
-server.listen(8000);
-console.log("Server listening at http://127.0.0.1:8000/");
+var handleRequest = function(request, response) {
+  console.log('Received request for URL: ' + request.url);
+  response.writeHead(200);
+  response.end('Hello World! - v4');
+};
+var www = http.createServer(handleRequest);
+www.listen(8080);
