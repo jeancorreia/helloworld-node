@@ -22,4 +22,4 @@ spec:
         - containerPort: 8080
         env:
         - name: REDEPLOY_FLAG
-          value: 'THIS_STRING_IS_REPLACED_DURING_BUILD'
+          value: v9
