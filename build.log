@@ -1,0 +1,21 @@
+Sending build context to Docker daemon  131.6kB
+Step 1/6 : FROM node:latest
+ ---> f7756628c1ee
+Step 2/6 : LABEL maintainer "jeancorreia@mylab.jcc"
+ ---> Using cache
+ ---> 15b911164d20
+Step 3/6 : EXPOSE 8080
+ ---> Using cache
+ ---> d2b8e4d91656
+Step 4/6 : COPY main.js .
+ ---> fbab7657e668
+Step 5/6 : CMD node main.js
+ ---> Running in 34b32d31ebb5
+Removing intermediate container 34b32d31ebb5
+ ---> e75648999f42
+Step 6/6 : EXPOSE 8000
+ ---> Running in fa70a655f3a8
+Removing intermediate container fa70a655f3a8
+ ---> 4a186f1a1984
+Successfully built 4a186f1a1984
+Successfully tagged registry.mylab.local:32000/hello-world:v9
