@@ -5,8 +5,8 @@ FROM node:latest
 LABEL maintainer "jeancorreia@mylab.jcc"
 
 EXPOSE 8080
-COPY server.js .
-CMD node server.js
+COPY main.js .
+CMD node main.js
 
 # Porta/Socket Exposto para Conexao
 EXPOSE 8000
