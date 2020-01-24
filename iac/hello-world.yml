@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+spec:
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: hello-world
+        image: registry.mylab.local:32000/hello-world:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: REDEPLOY_FLAG
+          value: 'THIS_STRING_IS_REPLACED_DURING_BUILD'
