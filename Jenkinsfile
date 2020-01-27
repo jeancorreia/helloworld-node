@@ -1,37 +1,35 @@
-node {
-    def app
-    stage('Downloading Source from GIT') {
-        /* Let's make sure we have the repository cloned to our 
-workspace */
-        checkout scm
+pipeline {
+  environment {
+    registry = "registry.mylab.local/helloworld"
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/jeancorreia/helloworld-node.git'
+      }
     }
-    
-    stage('Building') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
-        app = docker.build("getintodevops/hellonode")
-    }
-    stage('Testing a Lot') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) 
-*/
-        app.inside {
-            sh 'grep node Dockerfile ; if [ $? -ne 0 ] ;then exit 1 ;fi'
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
-    stage('Deployment') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. 
-*/
-        timeout(time:5, unit:'MINUTES') {
-            input message:'Aprovar esse deployment?', submitter: 'admin'
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
         }
-        docker.withRegistry('http://10.203.178.113:5000', 'nexus-admin') 
-{
-            app.push("${env.BUILD_NUMBER}")
-            app.push("dev")
-        }
+      }
     }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
 }

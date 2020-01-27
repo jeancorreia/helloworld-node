@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo $USER
+
+echo Sempre chamar esse script como: source deployment.sh <nro build>
 
 echo 1 - Baixando o fonte
 git pull

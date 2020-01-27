@@ -22,4 +22,4 @@ spec:
         - containerPort: 8080
         env:
         - name: REDEPLOY_FLAG
-          value: v14
+          value: v16
