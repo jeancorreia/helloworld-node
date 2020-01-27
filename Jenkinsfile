@@ -12,20 +12,13 @@ pipeline {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-)
 	*/
+        steps {
+              sh 'echo Testing a Lot'
+        }
     }
     stage('Deployment') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused.
-
-        timeout(time:5, unit:'MINUTES') {
-            input message:'Aprovar esse deployment?', submitter: 'admin'
+        steps {
+	      sh 'echo Deployment'
         }
-        docker.withRegistry('http://10.203.178.113:5000', 'nexus-admin')
-        {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("dev")
-        } */
     }
 }
