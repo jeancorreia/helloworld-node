@@ -14,9 +14,15 @@ pipeline {
            }
 
            stage('Testing a Lot') {
+               steps {
+                     sh 'echo Testing a Lot'
+               }
            }
  
            stage('Deployment') {
+               steps {
+                     sh 'Deployment'
+               }
            }
     } 
 }
