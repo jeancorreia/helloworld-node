@@ -29,14 +29,8 @@ pipeline {
            stage('Deployment') {
                steps {
                      sh 'sed -i "s/^\(\s*value\s*:\s*\).*/\1v${BUILD_NUMBER}/" iac/kubernetes.yml'
+                     sh 'kubectl apply -f iac/kubernetes.yml'
                }
            }
     } 
 }
-
-echo 5 - Ajuste variavel para a version do Build
-sed -i "s/^\(\s*value\s*:\s*\).*/\1v$1/" iac/kubernetes.yml
-
-echo 6 - Apply novo deployment
-kubectl apply -f iac/kubernetes.yml
-
