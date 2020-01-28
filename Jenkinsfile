@@ -9,7 +9,7 @@ pipeline {
 
            stage('Build Imagem Docker + App') {
                 steps {
-                      sh 'docker build -t registry.mylab.local:32000/hello-world:20 . >docker-build.log'
+                      sh 'docker build -t registry.mylab.local:32000/hello-world:${BUILD_NUMBER} . >docker-build.log'
                 }
            }
 
