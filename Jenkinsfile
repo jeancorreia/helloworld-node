@@ -29,7 +29,7 @@ pipeline {
            stage('Deployment') {
                steps {
                      sh '''sed -i "s/^\\(\\s*value\\s*:\\s*\\).*/\\1v${BUILD_NUMBER}/" iac/kubernetes.yml'''
-                     sh 'kubectl apply -f iac/kubernetes.yml'
+                     sh 'source kubectl apply -f iac/kubernetes.yml'
                }
            }
     } 
