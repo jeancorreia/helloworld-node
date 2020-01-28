@@ -9,13 +9,20 @@ pipeline {
 
            stage('Build Imagem Docker + App') {
                 steps {
-                      sh 'docker build -t registry.mylab.local:32000/hello-world:${BUILD_NUMBER} . >docker-build.log'
+                      sh 'docker build -t registry.mylab.local:32000/hello-world:${BUILD_NUMBER} .'
+                      sh 'docker tag ${BUILD_NUMBER} registry.mylab.local:32000/hello-world
                 }
            }
 
-           stage('Testing a Lot') {
+           stage('Uploading da Imagem para o Registry Container') {
+                steps {
+                      sh 'docker push registry.mylab.local:32000/hello-world:latest'
+                }
+           }
+
+           stage('Piramide de Teste') {
                steps {
-                     sh 'echo Testing a Lot'
+                     sh 'echo Piramide de Teste'
                }
            }
  
