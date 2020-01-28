@@ -29,7 +29,7 @@ pipeline {
            stage('Deployment') {
                steps {
                      sh '''sed -i "s/^\\(\\s*value\\s*:\\s*\\).*/\\1v${BUILD_NUMBER}/" iac/kubernetes.yml'''
-                     sh "kubectl --as='jenkins' apply -f iac/kubernetes.yml"
+                     sh "kubectl --insecure-skip-tls-verify=true apply -f iac/kubernetes.yml"
                }
            }
     } 
