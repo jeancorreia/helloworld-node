@@ -22,4 +22,4 @@ spec:
         - containerPort: 8080
         env:
         - name: REDEPLOY_FLAG
-          value: v16
+          value: JENKINS_BUILD_NUMBER
